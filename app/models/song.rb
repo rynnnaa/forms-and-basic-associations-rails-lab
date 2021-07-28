@@ -11,14 +11,12 @@ class Song < ActiveRecord::Base
     self.artist ? self.artist.name : nil
   end
 
-  def create
-    Song.create(artist_name_params)
+  def genre_name=(name)
+    self.genre = Genre.find_or_create_by(name: name)
   end
 
-  private
-
-  def artist_name_params
-    params.require(:song).permit(:artist_name, :artist_name)
-  end  
+  def genre_name
+    self.genre ? self.genre.name : nil
+  end
 
 end
