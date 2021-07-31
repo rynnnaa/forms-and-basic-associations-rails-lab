@@ -21,12 +21,13 @@ class Song < ActiveRecord::Base
 
   def note_contents=(contents)
     contents.each do |content|
-      note = Note.find(content)
-      self.notes << note
+      if content.strip != ""
+        self.notes.build(content: content)
+      end
     end
   end
 
   def note_contents
-    self.notes ? self.notes.contents : nil
+    self.notes.map(&:content)
   end
 end

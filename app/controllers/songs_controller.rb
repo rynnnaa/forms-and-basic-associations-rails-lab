@@ -15,8 +15,10 @@ class SongsController < ApplicationController
   def create
     artist = Artist.find_or_create_by(name: song_params[:artist_name])
     @song = artist.songs.build(song_params)
+  
 
     if @song.save
+      # byebug
       redirect_to @song
     else
       render :new
